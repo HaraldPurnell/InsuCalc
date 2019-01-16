@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#C7E1FF"
+    tools:context=".InsuCalc">
+
+    <View
+        android:id="@+id/myRectangleView"
+        android:layout_width="373dp"
+        android:layout_height="221dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.029" />
+
+    <Button
+        android:id="@+id/simulate"
+        android:layout_width="185dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button"
+        android:text="@string/simulate"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/CalcInsDos"
+        app:layout_constraintTop_toBottomOf="@+id/myRectangleView"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/CalcInsDos"
+        android:layout_width="180dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/button"
+        android:onClick="calcDose"
+        android:text="@string/calculate_insulin_dose"
+        android:textColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/myRectangleView"
+        app:layout_constraintVertical_bias="0.021"
+        tools:ignore="OnClick" />
+
+
+    <EditText
+        android:id="@+id/CBS"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="36dp"
+        android:ems="10"
+        android:hint="@string/CBS_Hint"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="@+id/myRectangleView"
+        app:layout_constraintTop_toTopOf="@+id/myRectangleView" />
+
+    <EditText
+        android:id="@+id/CV"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="100dp"
+        android:ems="10"
+        android:hint="@string/CV_Hint"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="@+id/myRectangleView"
+        app:layout_constraintTop_toTopOf="@+id/myRectangleView" />
+
+    <EditText
+        android:id="@+id/DIA"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="4dp"
+        android:ems="10"
+        android:hint="@string/DIA_Hint"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@+id/myRectangleView"
+        app:layout_constraintTop_toTopOf="@+id/myRectangleView" />
+
+    <EditText
+        android:id="@+id/ICR"
+        android:layout_width="169dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="112dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="@string/ICR_Hint"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/myRectangleView"
+        app:layout_constraintEnd_toEndOf="@+id/myRectangleView" />
+
+    <EditText
+        android:id="@+id/TBS"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="4dp"
+        android:ems="10"
+        android:hint="@string/TBS_Hint"
+        android:inputType="numberDecimal"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="@+id/myRectangleView"
+        app:layout_constraintTop_toTopOf="@+id/myRectangleView" />
+
+    <TextView
+        android:id="@+id/calcValtext"
+        android:layout_width="72dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="104dp"
+        android:text="@string/calc_value"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/insuDose"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/insuDose"
+        android:layout_width="103dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="64dp"
+        android:text="@string/calcval_Dummy"
+        android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/CalcInsDos"
+        app:layout_constraintTop_toBottomOf="@+id/simulate" />
+
+    <TextView
+        android:id="@+id/CBStext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/CBS_Text"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/CBS"
+        app:layout_constraintStart_toStartOf="@+id/myRectangleView"
+        app:layout_constraintTop_toTopOf="@+id/myRectangleView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/ICRtext"
+        android:layout_width="182dp"
+        android:layout_height="18dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginBottom="52dp"
+        android:text="@string/ITR_Text"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="@+id/myRectangleView"
+        app:layout_constraintStart_toStartOf="@+id/myRectangleView" />
+
+    <TextView
+        android:id="@+id/CVtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/CV_Text"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/CV"
+        app:layout_constraintStart_toStartOf="@+id/myRectangleView"
+        app:layout_constraintTop_toTopOf="@+id/myRectangleView"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/DIAtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="@string/DIA_Text"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/DIA"
+        app:layout_constraintEnd_toEndOf="@+id/myRectangleView" />
+
+    <TextView
+        android:id="@+id/TBStext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/TBS_Text"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@+id/TBS"
+        app:layout_constraintEnd_toEndOf="@+id/myRectangleView"
+        app:layout_constraintTop_toTopOf="@+id/myRectangleView"
+        app:layout_constraintVertical_bias="1.0" />
+
+</android.support.constraint.ConstraintLayout>
