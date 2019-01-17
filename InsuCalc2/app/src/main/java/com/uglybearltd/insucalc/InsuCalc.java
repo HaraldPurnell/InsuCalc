@@ -1,12 +1,13 @@
 package com.uglybearltd.insucalc;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.InputFilter;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
 
 public class InsuCalc extends AppCompatActivity {
 
@@ -15,32 +16,20 @@ public class InsuCalc extends AppCompatActivity {
     public TextView insuDose;
     public float fDIA, fCBS, fTBS, fICR, fCV;
     public int[] etIds;
+    public Button buttonCalc, buttonDiscl;
+    Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insu_calc);
 
-        // EditText assignments and limitFilters
+        // EditText assignments
         etDIA = findViewById(R.id.DIA);
-        InputFilterMinMax limitFilterDIA = new InputFilterMinMax((float) 1.00, (float) 100.00);
-        etDIA.setFilters(new InputFilter[]{ limitFilterDIA}); //fine
-
         etCBS = findViewById(R.id.CBS);
-        InputFilterMinMax limitFilterCBS = new InputFilterMinMax((float) 1.00, (float) 23.00);
-        etCBS.setFilters(new InputFilter[]{ limitFilterCBS}); //fine
-
         etTBS = findViewById(R.id.TBS);
-        InputFilterMinMax limitFilterTBS = new InputFilterMinMax((float) 5.00, (float) 8.00);
-        etTBS.setFilters(new InputFilter[]{ limitFilterTBS}); // Upper limit not working
-
         etICR = findViewById(R.id.ICR);
-        InputFilterMinMax limitFilterICR = new InputFilterMinMax((float) 1.00, (float) 20.00);
-        etICR.setFilters(new InputFilter[]{ limitFilterICR}); //fine
-
         etCV = findViewById(R.id.CV);
-        InputFilterMinMax limitFilterCV = new InputFilterMinMax((float) 1.00, (float) 200.00);
-        etCV.setFilters(new InputFilter[]{ limitFilterCV}); //fine
 
         insuDose =  findViewById(R.id.insuDose);
 
@@ -52,33 +41,76 @@ public class InsuCalc extends AppCompatActivity {
                         R.id.ICR,
                         R.id.CV
                 };
+
+        Button buttonCalc = findViewById(R.id.CalcInsDos);
+        Button buttonDiscl = findViewById(R.id.disclaimer);
+
+        buttonCalc.setOnClickListener(mListener);
+        buttonDiscl.setOnClickListener(mListener);
     }
 
-    public void calcDose(View view) {
+    private View.OnClickListener mListener = new View.OnClickListener() {
+        public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.CalcInsDos:
+                        try {
+                            sDIA = etDIA.getText().toString();
+                            sCBS = etCBS.getText().toString();
+                            sTBS = etTBS.getText().toString();
+                            sICR = etICR.getText().toString();
+                            sCV = etCV.getText().toString();
 
-        try {
-            sDIA = etDIA.getText().toString();
-            sCBS = etCBS.getText().toString();
-            sTBS = etTBS.getText().toString();
-            sICR = etICR.getText().toString();
-            sCV = etCV.getText().toString();
+                            float fDIA = Float.valueOf(sDIA);
+                            float fCBS = Float.valueOf(sCBS);
+                            float fTBS = Float.valueOf(sTBS);
+                            float fICR = Float.valueOf(sICR);
+                            float fCV = Float.valueOf(sCV);
 
-            float fDIA = Float.valueOf(sDIA);
-            float fCBS = Float.valueOf(sCBS);
-            float fTBS = Float.valueOf(sTBS);
-            float fICR = Float.valueOf(sICR);
-            float fCV = Float.valueOf(sCV);
+                            float BID = fCV / fICR;
+                            float ISF = 100 / fDIA;
 
-            float BID = fCV/fICR;
-            float ISF = 100/fDIA;
+                            float fInsuDose = Math.round((BID + ((fCBS - fTBS) / ISF)) * 2) / 2;
 
-            float fInsuDose = Math.round((BID + ((fCBS - fTBS)/ISF)) * 2) / 2;
-            insuDose.setText(Float.toString(fInsuDose));
+                            if ((fDIA > 100.0) && (fDIA < 10.0) && (fCBS > 24.0) && (fCBS < 2.0) && (fTBS > 8.0)
+                                    && (fTBS < 5.0) && (fICR > 20.0) || (fICR < 1.0) && (fCV > 200.0) && (fCV < 1.0)) {
+                                validateEditText(etIds);
+                            } else if ((fDIA > 100.0) || (fDIA < 10.0)) {
+                                validateEditText(etIds);
+                            } else if ((fCBS > 24.0) || (fCBS < 2.0)) {
+                                validateEditText(etIds);
+                            } else if ((fTBS > 8.0) || (fTBS < 5.0)) {
+                                validateEditText(etIds);
+                            } else if ((fICR > 20.0) || (fICR < 1.0)) {
+                                validateEditText(etIds);
+                            } else if ((fCV > 200.0) || (fCV < 1.0)) {
+                                validateEditText(etIds);
+                            } else {
+                                insuDose.setText(Float.toString(fInsuDose));
+                            }
+                        } catch (NumberFormatException e) {
+                            validateEditText(etIds);
+                        }
+                        break;
 
-        } catch (NumberFormatException e) {
-            validateEditText(etIds);
+                    case R.id.disclaimer:
+
+                                final Dialog dialog = new Dialog(context);
+                                dialog.setContentView(R.layout.disclaimer);
+                                dialog.setTitle("Disclaimer");
+
+                                TextView text = dialog.findViewById(R.id.text);
+                                //text.setText("Android custom dialog example!");
+                                Button dialogButton = dialog.findViewById(R.id.dialogButtonOK);
+                                dialogButton.setOnClickListener(new View.OnClickListener()
+                                {
+                                    public void onClick(View v) {
+                                                dialog.dismiss();
+                                    }
+                                });
+                                dialog.show();
+                }
         }
-    }
+    };
 
     // Checks if strings length is empty and if so, returns true
     public boolean isEmpty(EditText editText) {
@@ -94,10 +126,10 @@ public class InsuCalc extends AppCompatActivity {
             if (isEmpty(editText)) {
                 editText.setError("Incorrect Input");
             }
+            else {
+                editText.setError("Out of range");
+            }
         }
     }
-    /*
-    public float roundToHalf(float number) {
-        return Math.round(number * 2) / 2;
-    } */
+
 }

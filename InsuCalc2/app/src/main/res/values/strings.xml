@@ -13,5 +13,14 @@
     <string name="DIA_Text">Daily Total Insulin</string>
     <string name="TBS_Text">Target Blood Sugar</string>
     <string name="CBS_Text">Current Blood Sugar</string>
-    <string name="calcval_Dummy">0.0</string>
+    <string name="calcval_Dummy">00.0</string>
+    <string name="units">Units</string>
+    <string name="suggested_dose">Suggested Dose</string>
+    <string name="disclaimer_text">The information contained herein should NOT be used as a replacement for the advice given by a qualified and licensed medical professional.
+This tool is designed for the purpose of ASSISTING a type 1 diabetic with insulin calculations.
+This insulin calculator is not 100% accurate.
+All information entered by the user is assumed to be correct and accurate.
+Please seek the advice of an appropriately trained medical professional for any medical concerns problems relating to your insulin regime and/or type 1 diabetes.
+</string>
+    <string name="disclaimer">Disclaimer</string>
 </resources>
