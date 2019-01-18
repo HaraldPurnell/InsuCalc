@@ -98,16 +98,15 @@ public class InsuCalc extends AppCompatActivity {
                                 dialog.setContentView(R.layout.disclaimer);
                                 dialog.setTitle("Disclaimer");
 
-                                TextView text = dialog.findViewById(R.id.text);
-                                //text.setText("Android custom dialog example!");
-                                Button dialogButton = dialog.findViewById(R.id.dialogButtonOK);
-                                dialogButton.setOnClickListener(new View.OnClickListener()
+                                Button disclaimerButton = dialog.findViewById(R.id.quitDisclaimer);
+                                disclaimerButton.setOnClickListener(new View.OnClickListener()
                                 {
                                     public void onClick(View v) {
                                                 dialog.dismiss();
                                     }
                                 });
                                 dialog.show();
+
                 }
         }
     };

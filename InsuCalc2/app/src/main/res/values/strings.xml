@@ -22,5 +22,9 @@ This insulin calculator is not 100% accurate.
 All information entered by the user is assumed to be correct and accurate.
 Please seek the advice of an appropriately trained medical professional for any medical concerns problems relating to your insulin regime and/or type 1 diabetes.
 </string>
+
     <string name="disclaimer">Disclaimer</string>
+    <string name="github"> All relevant documentation and code can be found at
+        \n\n
+        https://github.com/HaraldPurnell/InsuCalc</string>
 </resources>

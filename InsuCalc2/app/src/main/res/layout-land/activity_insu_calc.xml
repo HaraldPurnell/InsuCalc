@@ -9,28 +9,24 @@
 
     <View
         android:id="@+id/myRectangleView5"
-        android:layout_width="291dp"
-        android:layout_height="237dp"
-        android:layout_marginStart="304dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="290dp"
+        android:layout_height="177dp"
+        android:layout_marginStart="728dp"
+        android:layout_marginBottom="44dp"
         android:background="@drawable/rectangle"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/simulate"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/myRectangleView2"
-        android:layout_width="583dp"
-        android:layout_height="255dp"
+        android:layout_width="711dp"
+        android:layout_height="230dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/rectangle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/myRectangleView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -48,23 +44,23 @@
 
     <View
         android:id="@+id/myRectangleView"
-        android:layout_width="288dp"
-        android:layout_height="569dp"
+        android:layout_width="294dp"
+        android:layout_height="450dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/rectangle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myRectangleView2"
-        app:layout_constraintVertical_bias="0.028" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/simulate"
-        android:layout_width="287dp"
-        android:layout_height="99dp"
+        android:layout_width="215dp"
+        android:layout_height="97dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="500dp"
         android:layout_marginBottom="388dp"
         android:background="@drawable/button"
         android:text="@string/simulate"
@@ -73,13 +69,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/CalcInsDos"
-        app:layout_constraintVertical_bias="0.136" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/CalcInsDos"
-        android:layout_width="288dp"
+        android:layout_width="215dp"
         android:layout_height="97dp"
-        android:layout_marginStart="304dp"
+        android:layout_marginStart="308dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="516dp"
         android:background="@drawable/button"
@@ -89,13 +85,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/myRectangleView2"
+        app:layout_constraintVertical_bias="0.005"
         tools:ignore="OnClick" />
 
     <Button
         android:id="@+id/disclaimer"
-        android:layout_width="285dp"
-        android:layout_height="43dp"
-        android:layout_marginEnd="304dp"
+        android:layout_width="294dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="4dp"
         android:background="#C7E1FF"
         android:text="@string/disclaimer"
         android:textColor="#000000"
@@ -173,17 +171,14 @@
         android:id="@+id/calcValtext"
         android:layout_width="286dp"
         android:layout_height="49dp"
-        android:layout_marginStart="304dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="196dp"
         android:text="@string/suggested_dose"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/myRectangleView5"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="@+id/myRectangleView5"
+        app:layout_constraintTop_toTopOf="@+id/myRectangleView5" />
 
     <TextView
         android:id="@+id/inputHeading"
@@ -289,9 +284,9 @@
 
     <TextView
         android:id="@+id/ghLink"
-        android:layout_width="291dp"
-        android:layout_height="136dp"
-        android:layout_marginEnd="4dp"
+        android:layout_width="177dp"
+        android:layout_height="219dp"
+        android:layout_marginEnd="312dp"
         android:layout_marginBottom="4dp"
         android:autoLink="web"
         android:text="@string/github"
