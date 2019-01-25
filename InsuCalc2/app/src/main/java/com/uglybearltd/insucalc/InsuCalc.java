@@ -60,6 +60,7 @@ public class InsuCalc extends AppCompatActivity {
                             sICR = etICR.getText().toString();
                             sCV = etCV.getText().toString();
 
+                            /*
                             float fDIA = Float.valueOf(sDIA);
                             float fCBS = Float.valueOf(sCBS);
                             float fTBS = Float.valueOf(sTBS);
@@ -69,23 +70,37 @@ public class InsuCalc extends AppCompatActivity {
                             float BID = fCV / fICR;
                             float ISF = 100 / fDIA;
 
-                            float fInsuDose = Math.round((BID + ((fCBS - fTBS) / ISF)) * 2) / 2;
+                            float tempDose = (BID + ((fCBS - fTBS) / ISF));
+                            float fInsuDose = roundToHalf(tempDose);
+                            */
+                            double dDIA = Double.valueOf(sDIA);
+                            double dCBS = Double.valueOf(sCBS);
+                            double dTBS = Double.valueOf(sTBS);
+                            double dICR = Double.valueOf(sICR);
+                            double dCV = Double.valueOf(sCV);
 
-                            if ((fDIA > 100.0) && (fDIA < 10.0) && (fCBS > 24.0) && (fCBS < 2.0) && (fTBS > 8.0)
-                                    && (fTBS < 5.0) && (fICR > 20.0) || (fICR < 1.0) && (fCV > 200.0) && (fCV < 1.0)) {
+                            double BID = dCV / dICR;
+                            double ISF = 100 / dDIA;
+
+                            double tempDose = (BID + ((dCBS - dTBS) / ISF));
+                            double dInsuDose = roundToHalf(tempDose);
+
+                            if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0)
+                                    || (dTBS < 5.0)) && ((dICR > 20.0) || (dICR < 1.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
                                 validateEditText(etIds);
-                            } else if ((fDIA > 100.0) || (fDIA < 10.0)) {
+                            } else if ((dDIA > 100.0) || (dDIA < 10.0)) {
                                 validateEditText(etIds);
-                            } else if ((fCBS > 24.0) || (fCBS < 2.0)) {
+                            } else if ((dCBS > 22.0) || (dCBS < 2.0)) {
                                 validateEditText(etIds);
-                            } else if ((fTBS > 8.0) || (fTBS < 5.0)) {
+                            } else if ((dTBS > 8.0) || (dTBS < 5.0)) {
                                 validateEditText(etIds);
-                            } else if ((fICR > 20.0) || (fICR < 1.0)) {
+                            } else if ((dICR > 20.0) || (dICR < 1.0)) {
                                 validateEditText(etIds);
-                            } else if ((fCV > 200.0) || (fCV < 1.0)) {
+                            } else if ((dCV > 200.0) || (dCV < 1.0)) {
                                 validateEditText(etIds);
                             } else {
-                                insuDose.setText(Float.toString(fInsuDose));
+                                //insuDose.setText(Float.toString(fInsuDose));
+                                insuDose.setText(Double.toString(dInsuDose));
                             }
                         } catch (NumberFormatException e) {
                             validateEditText(etIds);
@@ -123,12 +138,16 @@ public class InsuCalc extends AppCompatActivity {
             EditText editText = findViewById(id);
 
             if (isEmpty(editText)) {
-                editText.setError("Incorrect Input");
+                editText.setError("You must Input a number!");
             }
             else {
-                editText.setError("Out of range");
+                editText.setError("Out of range!");
             }
         }
+    }
+
+    public static double roundToHalf(double d) {
+        return Math.round(d * 2) / 2.0;
     }
 
 }
