@@ -1,0 +1,21 @@
+Changelog for InsuCalc
+
+25/01/2019
+16:43
+
+All values originally of type: float changed to type: double to improve accuracy
+
+19:56
+
+Test Case: IC2 failed
+	1. Typo in DIA field
+	2. Wrong logic in If statement
+
+Test Case: IC7 failed
+	1. Typo in maximum value for CBS field (24.0 instead of 22.0)
+
+20:08
+
+All tests successful
+
+Cycle 1 complete
