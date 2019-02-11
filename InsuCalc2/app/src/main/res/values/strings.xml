@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">InsuCalc</string>
+    <string name="calc_value">Insulin Value</string>
+    <string name="TBS_Hint">E.g. 8.0</string>
+    <string name="ICR_Hint">E.g. 9.0</string>
+    <string name="DIA_Hint">E.g. 37.0</string>
+    <string name="CV_Hint">E.g. 67.45</string>
+    <string name="CBS_Hint">E.g. 7.5</string>
+    <string name="calculate_insulin_dose">1. Calculate Insulin Dose </string>
+    <string name="simulate">2. Create Graph for calculated dose</string>
+    <string name="ITR_Text">Insulin to Carbohydrate Ratio</string>
+    <string name="CV_Text">Carbohydrate Value</string>
+    <string name="DIA_Text">Daily Total Insulin</string>
+    <string name="TBS_Text">Target Blood Sugar</string>
+    <string name="CBS_Text">Current Blood Sugar</string>
+    <string name="calcval_Dummy">00.0</string>
+    <string name="units">Units</string>
+    <string name="suggested_dose">Suggested Dose</string>
+    <string name="disclaimer_text">The information contained herein should NOT be used as a replacement for the advice given by a qualified and licensed medical professional.
+This tool is designed for the purpose of ASSISTING a type 1 diabetic with insulin calculations.
+This insulin calculator is not 100% accurate.
+All information entered by the user is assumed to be correct and accurate.
+Please seek the advice of an appropriately trained medical professional for any medical concerns problems relating to your insulin regime and/or type 1 diabetes.
+</string>
+
+    <string name="instruct_text">
+        The InsuCalc application is made up of five input fields:
+        \n\n
+        <b>Target Blood Sugar</b> which accepts any value between 5.0 and 8.0
+        \n
+        <b>Current Blood Sugar</b> which accepts any value between 2.0 and 22.0
+        \n
+        <b>Carbohydrate Value</b> which accepts any value between 1.0 and 200.0
+        \n
+        <b>Insulin to Carbohydrate Ratio</b> which accepts any value between 1.0 and 20.0
+        \n
+        <b>Daily Total Insulin</b> which accepts any value between 10.0 and 100.0
+        \n\n
+        And two buttons:
+        \n\n
+        1. Calculate Insulin Dose (This must be pressed first!)
+        \n
+        2. Simulate
+</string>
+
+    <string name="disclaimer">Disclaimer</string>
+    <string name="github"> All relevant documentation and code can be found at
+        \n\n
+        https://github.com/HaraldPurnell/InsuCalc</string>
+    <string name="instructions">Instructions</string>
+</resources>
