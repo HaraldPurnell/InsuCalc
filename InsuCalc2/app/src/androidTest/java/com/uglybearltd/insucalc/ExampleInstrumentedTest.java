@@ -221,7 +221,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void Sim1() {
+    public void IC16() {
         onView(withId(R.id.CBS)).perform(typeText("11.0"), closeSoftKeyboard());
         onView(withId(R.id.TBS)).perform(typeText("8.0"), closeSoftKeyboard());
         onView(withId(R.id.ICR)).perform(typeText("10.0"), closeSoftKeyboard());
@@ -237,7 +237,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void Sim2() {
+    public void IC17() {
         onView(withId(R.id.CBS)).perform(typeText("8.0"), closeSoftKeyboard());
         onView(withId(R.id.TBS)).perform(typeText("8.0"), closeSoftKeyboard());
         onView(withId(R.id.ICR)).perform(typeText("10.0"), closeSoftKeyboard());
@@ -253,7 +253,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void Sim3() {
+    public void IC18() {
         onView(withId(R.id.CBS)).perform(typeText("4.6"), closeSoftKeyboard());
         onView(withId(R.id.TBS)).perform(typeText("8.0"), closeSoftKeyboard());
         onView(withId(R.id.ICR)).perform(typeText("10.0"), closeSoftKeyboard());
@@ -269,7 +269,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void Sim4() {
+    public void IC19() {
         onView(withId(R.id.CBS)).perform(typeText("2.0"), closeSoftKeyboard());
         onView(withId(R.id.TBS)).perform(typeText("5.0"), closeSoftKeyboard());
         onView(withId(R.id.ICR)).perform(typeText("1.0"), closeSoftKeyboard());
@@ -285,7 +285,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void Sim5() {
+    public void IC20() {
         onView(withId(R.id.CBS)).perform(typeText("22.0"), closeSoftKeyboard());
         onView(withId(R.id.TBS)).perform(typeText("8.0"), closeSoftKeyboard());
         onView(withId(R.id.ICR)).perform(typeText("20.0"), closeSoftKeyboard());
@@ -301,7 +301,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void Sim6() {
+    public void IC21() {
         onView(withId(R.id.CBS)).perform(typeText("22.1"), closeSoftKeyboard());
         onView(withId(R.id.TBS)).perform(typeText("8.1"), closeSoftKeyboard());
         onView(withId(R.id.ICR)).perform(typeText("20.1"), closeSoftKeyboard());
@@ -312,7 +312,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void Sim7() {
+    public void IC22() {
         onView(withId(R.id.CBS)).perform(typeText("0.9"), closeSoftKeyboard());
         onView(withId(R.id.TBS)).perform(typeText("4.9"), closeSoftKeyboard());
         onView(withId(R.id.ICR)).perform(typeText("0.9"), closeSoftKeyboard());
@@ -323,7 +323,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void Sim8(){
+    public void IC23(){
         onView(withId(R.id.CBS)).perform(typeText("11.0"), closeSoftKeyboard());
         onView(withId(R.id.CV)).perform(typeText("60.0"), closeSoftKeyboard());
         onView(withId(R.id.DIA)).perform(typeText("42.0"), closeSoftKeyboard());
@@ -334,7 +334,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void Sim9() {
+    public void IC24() {
         onView(withId(R.id.CBS)).perform(typeText("2.0"), closeSoftKeyboard());
         onView(withId(R.id.TBS)).perform(typeText("5.0"), closeSoftKeyboard());
         onView(withId(R.id.DIA)).perform(typeText("10.0"), closeSoftKeyboard());
@@ -345,7 +345,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void Sim10() {
+    public void IC25() {
         onView(withId(R.id.CBS)).perform(typeText("22.0"), closeSoftKeyboard());
         onView(withId(R.id.TBS)).perform(typeText("8.0"), closeSoftKeyboard());
         onView(withId(R.id.ICR)).perform(typeText("20.0"), closeSoftKeyboard());
@@ -356,7 +356,7 @@ public class ExampleInstrumentedTest {
     }
 
     @Test
-    public void Sim11(){
+    public void IC26(){
         onView(withId(R.id.simulate)).perform(click());
         onView(withId(R.id.output)).check(matches(hasErrorText("Something went wrong (See instructions for help)!")));
     }

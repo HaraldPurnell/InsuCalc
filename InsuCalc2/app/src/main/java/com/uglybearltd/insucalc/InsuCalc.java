@@ -1,12 +1,18 @@
 package com.uglybearltd.insucalc;
 
+/*
+  * © 2018-2019 Harald Purnell Some Rights Reserved.
+*/
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -31,6 +37,8 @@ public class InsuCalc extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insu_calc);
 
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
         // EditText assignments
         etDIA = findViewById(R.id.DIA);
         etCBS = findViewById(R.id.CBS);
@@ -38,6 +46,9 @@ public class InsuCalc extends AppCompatActivity {
         etICR = findViewById(R.id.ICR);
         etCV = findViewById(R.id.CV);
         output = findViewById(R.id.output);
+
+        output.setInputType(InputType.TYPE_NULL);
+        output.setText("00.0");
 
         insuDose3 =  findViewById(R.id.insuDose3);
         insuDose4 =  findViewById(R.id.insuDose4);
@@ -59,17 +70,16 @@ public class InsuCalc extends AppCompatActivity {
 
         // Button assignments and listeners
         Button buttonCalc = findViewById(R.id.CalcInsDos);
-        Button buttonDiscl = findViewById(R.id.disclaimer);
-        Button buttonInstruct = findViewById(R.id.instruct);
+        Button buttonDiscl = findViewById(R.id.disclSim);
+        Button buttonInstruct = findViewById(R.id.instrSim);
         Button simulate = findViewById(R.id.simulate);
-
 
         buttonCalc.setOnClickListener(mListener);
         buttonDiscl.setOnClickListener(mListener);
         buttonInstruct.setOnClickListener(mListener);
         simulate.setOnClickListener(mListener);
 
-        // Hide Keyboard when clicked outside of editText
+        // Hide Keyboard when interface is clicked outside of editText
         etDIA.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -110,6 +120,7 @@ public class InsuCalc extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private View.OnClickListener mListener = new View.OnClickListener() {
@@ -130,190 +141,19 @@ public class InsuCalc extends AppCompatActivity {
                             dICR = Double.valueOf(sICR);
                             dCV = Double.valueOf(sCV);
 
-                            double BID = dCV / dICR;
-                            double ISF = 100 / dDIA;
-
-                            double tempDose = (BID + ((dCBS - dTBS) / ISF));
-                            double dInsuDose = roundToHalf(tempDose);
-
-                            // 5's
-                            if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0)
-                                    || (dTBS < 5.0)) && ((dICR > 20.0) || (dICR < 1.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-
-                            // 4's
-                            else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0)
-                                    || (dTBS < 5.0)) && ((dICR > 20.0) || (dICR < 1.0))) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                            }
-                            else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0)
-                                    || (dTBS < 5.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-                            else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0)) &&
-                                    ((dICR > 20.0) || (dICR < 1.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-                            else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dTBS > 8.0) || (dTBS < 5.0))
-                                    && ((dICR > 20.0) || (dICR < 1.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-                            else if (((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0) || (dTBS < 5.0))
-                                    && ((dICR > 20.0) || (dICR < 1.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-
-                            // 3's
-                            else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0))
-                                    && ((dTBS > 8.0) || (dTBS < 5.0))) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                            }
-                            else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0))
-                                    && ((dICR > 20.0) || (dICR < 1.0))) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                            }
-                            else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0))
-                                    && ((dCV > 200.0) || (dCV < 1.0))) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-                            else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dTBS > 8.0) || (dTBS < 5.0))
-                                    && ((dICR > 20.0) || (dICR < 1.0))) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                            }
-                            else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dTBS > 8.0) || (dTBS < 5.0))
-                                    && ((dCV > 200.0) || (dCV < 1.0))) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-                            else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dICR > 20.0) || (dICR < 1.0))
-                                    && ((dCV > 200.0) || (dCV < 1.0))) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-                            else if (((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0) || (dTBS < 5.0))
-                                    && ((dICR > 20.0) || (dICR < 1.0))) {
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                            }
-                            else if (((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0) || (dTBS < 5.0))
-                                    && ((dCV > 200.0) || (dCV < 1.0))) {
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-                            else if (((dCBS > 22.0) || (dCBS < 2.0)) && ((dICR > 20.0) || (dICR < 1.0))
-                                    && ((dCV > 200.0) || (dCV < 1.0))) {
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-                            else if (((dTBS > 8.0) || (dTBS < 5.0)) && ((dICR > 20.0) || (dICR < 1.0))
-                                    && ((dCV > 200.0) || (dCV < 1.0))) {
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-
-                            // 2's
-                            else if ((dDIA > 100.0) || (dDIA < 10.0) && (dCBS > 22.0) || (dCBS < 2.0)) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                            }
-                            else if ((dDIA > 100.0) || (dDIA < 10.0) && (dTBS > 8.0) || (dTBS < 5.0)) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                            }
-                            else if ((dDIA > 100.0) || (dDIA < 10.0) && (dICR > 20.0) || (dICR < 1.0)) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                            }
-                            else if ((dDIA > 100.0) || (dDIA < 10.0) && (dCV > 200.0) || (dCV < 1.0)) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-                            else if ((dCBS > 22.0) || (dCBS < 2.0) && (dTBS > 8.0) || (dTBS < 5.0)) {
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                            }
-                            else if ((dCBS > 22.0) || (dCBS < 2.0) && (dICR > 20.0) || (dICR < 1.0)) {
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                            }
-                            else if ((dCBS > 22.0) || (dCBS < 2.0) && (dCV > 200.0) || (dCV < 1.0)) {
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-                            else if ((dTBS > 8.0) || (dTBS < 5.0) && (dICR > 20.0) || (dICR < 1.0)) {
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                            }
-                            else if ((dTBS > 8.0) || (dTBS < 5.0) && (dCV > 200.0) || (dCV < 1.0)) {
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-                            else if ((dICR > 20.0) || (dICR < 1.0) && (dCV > 200.0) || (dCV < 1.0)) {
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-
-                            // 1's
-                            else if ((dDIA > 100.0) || (dDIA < 10.0)) {
-                                etDIA.setError("Please input a number between 10.0 and 100.0!");
-                            }
-                            else if ((dCBS > 22.0) || (dCBS < 2.0)) {
-                                etCBS.setError("Please input a number between 2.0 and 22.0!");
-                            }
-                            else if ((dTBS > 8.0) || (dTBS < 5.0)) {
-                                etTBS.setError("Please input a number between 5.0 and 8.0!");
-                            }
-                            else if ((dICR > 20.0) || (dICR < 1.0)) {
-                                etICR.setError("Please input a number between 1.0 and 20.0!");
-                            }
-                            else if ((dCV > 200.0) || (dCV < 1.0)) {
-                                etCV.setError("Please input a number between 1.0 and 200.0!");
-                            }
-                            else {
+                            if (checkRange()) {
+                                double dInsuDose = calcDose(dDIA, dCBS, dTBS, dICR, dCV);
                                 clearErrorMessages(etIds);
                                 output.setError(null);
                                 output.setText(Double.toString(dInsuDose));
                             }
+
                         } catch (NumberFormatException e) {
-                            validateEditText(etIds);
+                            checkRange();
                         }
                         break;
 
-                    case R.id.disclaimer:
+                    case R.id.disclSim:
 
                         final Dialog dialog = new Dialog(context);
                         dialog.setContentView(R.layout.disclaimer);
@@ -321,7 +161,7 @@ public class InsuCalc extends AppCompatActivity {
                         dialog.show();
                         break;
 
-                    case R.id.instruct:
+                    case R.id.instrSim:
 
                         final Dialog dialog1 = new Dialog(context);
                         dialog1.setContentView(R.layout.instructions);
@@ -349,7 +189,6 @@ public class InsuCalc extends AppCompatActivity {
                             String insuDosecheck = output.getText().toString();
 
                             if (insuDosecheck.equals("00.0")) {
-                                //insuDose.requestFocus();
                                 output.setError("Something went wrong (See instructions for help)!");
 
                             }
@@ -433,25 +272,32 @@ public class InsuCalc extends AppCompatActivity {
                                             new DataPoint(4, roPoint4)
                                     });
                                     graph.addSeries(series);
-
                                 }
                             }
                         } catch (NumberFormatException e) {
-                            //insuDose.requestFocus();
                             output.setError("Something went wrong (See instructions for help)!");
-                            //DIA2.setError("Something went wrong (See instructions for help)!");
                         }
                         break;
                 }
+
         }
     };
+
+    // Calculate Insulin Dose using formula specified in design document
+    public double calcDose(double DIA, double CBS, double TBS, double ICR, double CV) {
+        double BID = CV / ICR;
+        double ISF = 100 / DIA;
+
+        double tempDose = (BID + ((CBS - TBS) / ISF));
+        return roundToHalf(tempDose);
+    }
 
     // Checks if strings length is empty and if so, returns true
     public boolean isEmpty(EditText editText) {
         return editText.getText().toString().trim().length() == 0;
     }
 
-    // For all editTexts in integer list, set error message
+    // For all editTexts in integer list, set error message if empty
     public void validateEditText(int[] ids)
     {
         for(int id: ids)
@@ -462,6 +308,207 @@ public class InsuCalc extends AppCompatActivity {
                 editText.setError("You must Input a number!");
             }
         }
+    }
+
+    // Check if any edit text value is out of range and set error if possible
+    public boolean checkRange() {
+        if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0)
+                || (dTBS < 5.0)) && ((dICR > 20.0) || (dICR < 1.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+
+        // 4's
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0)
+                || (dTBS < 5.0)) && ((dICR > 20.0) || (dICR < 1.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            return false;
+        }
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0)
+                || (dTBS < 5.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0)) &&
+                ((dICR > 20.0) || (dICR < 1.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dTBS > 8.0) || (dTBS < 5.0))
+                && ((dICR > 20.0) || (dICR < 1.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+        else if (((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0) || (dTBS < 5.0))
+                && ((dICR > 20.0) || (dICR < 1.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+
+        // 3's
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0))
+                && ((dTBS > 8.0) || (dTBS < 5.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            return false;
+        }
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0))
+                && ((dICR > 20.0) || (dICR < 1.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            return false;
+        }
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0))
+                && ((dCV > 200.0) || (dCV < 1.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dTBS > 8.0) || (dTBS < 5.0))
+                && ((dICR > 20.0) || (dICR < 1.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            return false;
+        }
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dTBS > 8.0) || (dTBS < 5.0))
+                && ((dCV > 200.0) || (dCV < 1.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dICR > 20.0) || (dICR < 1.0))
+                && ((dCV > 200.0) || (dCV < 1.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+        else if (((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0) || (dTBS < 5.0))
+                && ((dICR > 20.0) || (dICR < 1.0))) {
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            return false;
+        }
+        else if (((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0) || (dTBS < 5.0))
+                && ((dCV > 200.0) || (dCV < 1.0))) {
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+        else if (((dCBS > 22.0) || (dCBS < 2.0)) && ((dICR > 20.0) || (dICR < 1.0))
+                && ((dCV > 200.0) || (dCV < 1.0))) {
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+        else if (((dTBS > 8.0) || (dTBS < 5.0)) && ((dICR > 20.0) || (dICR < 1.0))
+                && ((dCV > 200.0) || (dCV < 1.0))) {
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+
+        // 2's
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCBS > 22.0) || (dCBS < 2.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            return false;
+        }
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dTBS > 8.0) || (dTBS < 5.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            return false;
+        }
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dICR > 20.0) || (dICR < 1.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            return false;
+        }
+        else if (((dDIA > 100.0) || (dDIA < 10.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+        else if (((dCBS > 22.0) || (dCBS < 2.0)) && ((dTBS > 8.0) || (dTBS < 5.0))) {
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            return false;
+        }
+        else if (((dCBS > 22.0) || (dCBS < 2.0)) && ((dICR > 20.0) || (dICR < 1.0))) {
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            return false;
+        }
+        else if (((dCBS > 22.0) || (dCBS < 2.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+        else if (((dTBS > 8.0) || (dTBS < 5.0)) && ((dICR > 20.0) || (dICR < 1.0))) {
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            return false;
+        }
+        else if (((dTBS > 8.0) || (dTBS < 5.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+        else if (((dICR > 20.0) || (dICR < 1.0)) && ((dCV > 200.0) || (dCV < 1.0))) {
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+
+        // 1's
+        else if ((dDIA > 100.0) || (dDIA < 10.0)) {
+            etDIA.setError("Please input a number between 10.0 and 100.0!");
+            return false;
+        }
+        else if ((dCBS > 22.0) || (dCBS < 2.0)) {
+            etCBS.setError("Please input a number between 2.0 and 22.0!");
+            return false;
+        }
+        else if ((dTBS > 8.0) || (dTBS < 5.0)) {
+            etTBS.setError("Please input a number between 5.0 and 8.0!");
+            return false;
+        }
+        else if ((dICR > 20.0) || (dICR < 1.0)) {
+            etICR.setError("Please input a number between 1.0 and 20.0!");
+        }
+        else if ((dCV > 200.0) || (dCV < 1.0)) {
+            etCV.setError("Please input a number between 1.0 and 200.0!");
+            return false;
+        }
+        return true;
     }
 
     // For all editTexts in integer list, clear error messages
@@ -485,9 +532,14 @@ public class InsuCalc extends AppCompatActivity {
         return (double) Math.round(value * scale) / scale;
     }
 
+    // Hides soft keyboard
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
+    public void launchSimulator(View view) {
+        Intent intent = new Intent(this, Simulator.class);
+        startActivity(intent);
+    }
 }
