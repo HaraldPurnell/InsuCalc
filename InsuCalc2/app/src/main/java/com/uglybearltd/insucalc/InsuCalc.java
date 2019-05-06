@@ -149,7 +149,7 @@ public class InsuCalc extends AppCompatActivity {
                             }
 
                         } catch (NumberFormatException e) {
-                            checkRange();
+                            checkEmpty(etIds);
                         }
                         break;
 
@@ -509,6 +509,17 @@ public class InsuCalc extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    public void checkEmpty(int[] ids) {
+        for(int id: ids)
+        {
+            EditText editText = findViewById(id);
+
+            if (isEmpty(editText)) {
+                editText.setError("You must Input a number!");
+            }
+        }
     }
 
     // For all editTexts in integer list, clear error messages

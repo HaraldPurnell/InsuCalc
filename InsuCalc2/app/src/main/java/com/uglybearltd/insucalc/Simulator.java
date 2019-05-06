@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
@@ -23,6 +24,7 @@ import java.util.List;
 public class Simulator extends AppCompatActivity {
 
     public EditText bs1h, bs2h, bs3h, bs4h, cbsVal;
+    public TextView test1, test2, test3, test4, test5;
     public Button addData;
     public int[] etIds;
     GraphView graphV2;
@@ -40,11 +42,19 @@ public class Simulator extends AppCompatActivity {
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        // Five user inputs
         bs1h = findViewById(R.id.bs1hVal);
         bs2h = findViewById(R.id.bs2hVal);
         bs3h = findViewById(R.id.bs3hVal);
         bs4h = findViewById(R.id.bs4hVal);
         cbsVal = findViewById(R.id.cbsConsVal);
+
+        // Textviews used for testing
+        test1 = findViewById(R.id.test1);
+        test2 = findViewById(R.id.test2);
+        test3 = findViewById(R.id.test3);
+        test4 = findViewById(R.id.test4);
+        test5 = findViewById(R.id.test5);
 
         addData = findViewById(R.id.addData);
         Button createGraph = findViewById(R.id.createGraph);
@@ -124,32 +134,28 @@ public class Simulator extends AppCompatActivity {
             public void onClick(View v) {
 
                 try {
-                    if (checkRange(etIds)) {
+                    if (checkRangeSum(etIds) == 0) {
+                        //Gather values from each edit text and assign to respective array
                         str1H = bs1h.getText().toString();
                         do1H = Double.valueOf(str1H);
                         listBs1H.add(do1H);
-                        //adapter1H.notifyDataSetChanged();
 
                         str2H = bs2h.getText().toString();
                         do2H = Double.valueOf(str2H);
                         listBs2H.add(do2H);
-                        //adapter2H.notifyDataSetChanged();
 
                         str3H = bs3h.getText().toString();
                         do3H = Double.valueOf(str3H);
                         listBs3H.add(do3H);
-                        //adapter3H.notifyDataSetChanged();
 
                         str4H = bs4h.getText().toString();
                         do4H = Double.valueOf(str4H);
                         listBs4H.add(do4H);
-                        //adapter4H.notifyDataSetChanged();
 
                         bs1h.setText(null);
                         bs2h.setText(null);
                         bs3h.setText(null);
                         bs4h.setText(null);
-
                     }
                 }
                 catch (NumberFormatException e) {
@@ -190,7 +196,7 @@ public class Simulator extends AppCompatActivity {
                             if (isEmpty(cbsVal)) {
                                 cbsVal.setError("No value has been entered!");
                             } else {
-                                if (checkRange(cbsVal)) {
+                                if (checkRangeSingle(cbsVal)) {
 
                                     strCBS = cbsVal.getText().toString();
                                     doCBS = Double.valueOf(strCBS);
@@ -227,6 +233,13 @@ public class Simulator extends AppCompatActivity {
                                     point4 = (factor4 * doCBS);
                                     roPoint4 = round(point4, 2);
 
+                                    // Values for testing
+                                    test1.setText(Double.toString(doCBS));
+                                    test2.setText(Double.toString(roPoint1));
+                                    test3.setText(Double.toString(roPoint2));
+                                    test4.setText(Double.toString(roPoint3));
+                                    test5.setText(Double.toString(roPoint4));
+
                                     LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
                                             new DataPoint(0, doCBS),
                                             new DataPoint(1, roPoint1),
@@ -242,8 +255,6 @@ public class Simulator extends AppCompatActivity {
                     } catch (NumberFormatException e) {
                         cbsVal.setError("No value has been entered!");
                     }
-
-
             }
         }
     };
@@ -263,7 +274,9 @@ public class Simulator extends AppCompatActivity {
         }
     }
 
-    public boolean checkRange(int[] ids) {
+    public int checkRangeSum(int[] ids) {
+        int sum = 0;
+
         for(int id: ids)
         {
             EditText editText = findViewById(id);
@@ -272,16 +285,13 @@ public class Simulator extends AppCompatActivity {
 
             if ((doubleET < 2.0) || (doubleET > 22.0)) {
                 editText.setError("You must enter a value within the valid range!");
-                return false;
-            }
-            else {
-                checkEmpty(ids);
+                sum = sum + 1;
             }
         }
-        return true;
+        return sum;
     }
 
-    public boolean checkRange(EditText editText) {
+    public boolean checkRangeSingle(EditText editText) {
 
         String stringET = editText.getText().toString();
         Double doubleET = Double.valueOf(stringET);

@@ -37,7 +37,6 @@ public class ExampleInstrumentedTest {
 
     @Before
     public void initValidString() {
-        // Specify a valid string.
         insuDoseCheck = "00.0";
     }
 
@@ -359,5 +358,201 @@ public class ExampleInstrumentedTest {
     public void IC26(){
         onView(withId(R.id.simulate)).perform(click());
         onView(withId(R.id.output)).check(matches(hasErrorText("Something went wrong (See instructions for help)!")));
+    }
+
+    @Test
+    public void Sim1() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.bs1hVal)).check(matches(hasErrorText("You must Input a number!")));
+        onView(withId(R.id.bs2hVal)).check(matches(hasErrorText("You must Input a number!")));
+        onView(withId(R.id.bs3hVal)).check(matches(hasErrorText("You must Input a number!")));
+        onView(withId(R.id.bs4hVal)).check(matches(hasErrorText("You must Input a number!")));
+    }
+
+    @Test
+    public void Sim2() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs1hVal)).perform(typeText("22.1"), closeSoftKeyboard());
+        onView(withId(R.id.bs2hVal)).perform(typeText("22.1"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("22.1"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("22.1"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.bs1hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+        onView(withId(R.id.bs2hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+        onView(withId(R.id.bs3hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+        onView(withId(R.id.bs4hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+    }
+
+    @Test
+    public void Sim3() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs1hVal)).perform(typeText("1.9"), closeSoftKeyboard());
+        onView(withId(R.id.bs2hVal)).perform(typeText("1.9"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("1.9"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("1.9"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.bs1hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+        onView(withId(R.id.bs2hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+        onView(withId(R.id.bs3hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+        onView(withId(R.id.bs4hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+    }
+
+    @Test
+    public void Sim4() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs1hVal)).perform(typeText("27.3"), closeSoftKeyboard());
+        onView(withId(R.id.bs2hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.bs1hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+    }
+
+    @Test
+    public void Sim5() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs1hVal)).perform(typeText("27.3"), closeSoftKeyboard());
+        onView(withId(R.id.bs2hVal)).perform(typeText("27.3"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.bs1hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+        onView(withId(R.id.bs2hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+    }
+
+    @Test
+    public void Sim6() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs1hVal)).perform(typeText("27.3"), closeSoftKeyboard());
+        onView(withId(R.id.bs2hVal)).perform(typeText("27.3"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("27.3"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.bs1hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+        onView(withId(R.id.bs2hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+        onView(withId(R.id.bs3hVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+    }
+
+    @Test
+    public void Sim7() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs2hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.bs1hVal)).check(matches(hasErrorText("You must Input a number!")));
+    }
+
+    @Test
+    public void Sim8() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs3hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.bs1hVal)).check(matches(hasErrorText("You must Input a number!")));
+        onView(withId(R.id.bs2hVal)).check(matches(hasErrorText("You must Input a number!")));
+    }
+
+    @Test
+    public void Sim9() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs4hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.bs1hVal)).check(matches(hasErrorText("You must Input a number!")));
+        onView(withId(R.id.bs2hVal)).check(matches(hasErrorText("You must Input a number!")));
+        onView(withId(R.id.bs3hVal)).check(matches(hasErrorText("You must Input a number!")));
+    }
+
+    @Test
+    public void Sim10() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.createGraph)).perform(click());
+        onView(withId(R.id.cbsConsVal)).check(matches(hasErrorText("The Array is Empty!")));
+    }
+
+    @Test
+    public void Sim11() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs1hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs2hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.createGraph)).perform(click());
+        onView(withId(R.id.cbsConsVal)).check(matches(hasErrorText("No value has been entered!")));
+    }
+
+    @Test
+    public void Sim12() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs1hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs2hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.cbsConsVal)).perform(typeText("22.1"), closeSoftKeyboard());
+        onView(withId(R.id.createGraph)).perform(click());
+        onView(withId(R.id.cbsConsVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+    }
+
+    @Test
+    public void Sim13() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs1hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs2hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.cbsConsVal)).perform(typeText("1.9"), closeSoftKeyboard());
+        onView(withId(R.id.createGraph)).perform(click());
+        onView(withId(R.id.cbsConsVal)).check(matches(hasErrorText("You must enter a value within the valid range!")));
+    }
+
+    @Test
+    public void Sim14() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs1hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs2hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+        onView(withId(R.id.cbsConsVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.createGraph)).perform(click());
+        onView(withId(R.id.test1)).check(matches(withText("5.0")));
+        onView(withId(R.id.test2)).check(matches(withText("5.0")));
+        onView(withId(R.id.test3)).check(matches(withText("5.0")));
+        onView(withId(R.id.test4)).check(matches(withText("5.0")));
+        onView(withId(R.id.test5)).check(matches(withText("5.0")));
+    }
+
+    @Test
+    public void Sim15() {
+        onView(withId(R.id.navSim)).perform(click());
+        onView(withId(R.id.bs1hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs2hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+
+        onView(withId(R.id.bs1hVal)).perform(typeText("10.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs2hVal)).perform(typeText("10.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("10.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("10.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+
+        onView(withId(R.id.bs1hVal)).perform(typeText("15.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs2hVal)).perform(typeText("15.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs3hVal)).perform(typeText("15.0"), closeSoftKeyboard());
+        onView(withId(R.id.bs4hVal)).perform(typeText("15.0"), closeSoftKeyboard());
+        onView(withId(R.id.addData)).perform(click());
+
+        onView(withId(R.id.cbsConsVal)).perform(typeText("5.0"), closeSoftKeyboard());
+        onView(withId(R.id.createGraph)).perform(click());
+        onView(withId(R.id.test1)).check(matches(withText("5.0")));
+        onView(withId(R.id.test2)).check(matches(withText("10.0")));
+        onView(withId(R.id.test3)).check(matches(withText("10.0")));
+        onView(withId(R.id.test4)).check(matches(withText("10.0")));
+        onView(withId(R.id.test5)).check(matches(withText("10.0")));
     }
 }

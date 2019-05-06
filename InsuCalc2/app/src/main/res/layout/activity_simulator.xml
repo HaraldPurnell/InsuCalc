@@ -9,6 +9,81 @@
     android:focusableInTouchMode="true"
     tools:context=".Simulator">
 
+    <TextView
+        android:id="@+id/test1"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:text="@string/calcval_Dummy"
+        android:textAlignment="center"
+        android:textColor="#ACDBFF"
+        android:textSize="1sp"
+        app:layout_constraintEnd_toEndOf="@+id/graphV2"
+        app:layout_constraintTop_toTopOf="@+id/graphV2" />
+
+    <TextView
+        android:id="@+id/test2"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="8dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:text="@string/calcval_Dummy"
+        android:textAlignment="center"
+        android:textColor="#ACDBFF"
+        android:textSize="1sp"
+        app:layout_constraintEnd_toEndOf="@+id/graphV2"
+        app:layout_constraintTop_toTopOf="@+id/graphV2" />
+
+    <TextView
+        android:id="@+id/test3"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="8dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:text="@string/calcval_Dummy"
+        android:textAlignment="center"
+        android:textColor="#ACDBFF"
+        android:textSize="1sp"
+        app:layout_constraintEnd_toEndOf="@+id/graphV2"
+        app:layout_constraintTop_toTopOf="@+id/graphV2" />
+
+    <TextView
+        android:id="@+id/test4"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="108dp"
+        android:layout_marginEnd="8dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:text="@string/calcval_Dummy"
+        android:textAlignment="center"
+        android:textColor="#ACDBFF"
+        android:textSize="1sp"
+        app:layout_constraintEnd_toEndOf="@+id/graphV2"
+        app:layout_constraintTop_toTopOf="@+id/graphV2" />
+
+    <TextView
+        android:id="@+id/test5"
+        android:layout_width="40dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="8dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:text="@string/calcval_Dummy"
+        android:textAlignment="center"
+        android:textColor="#ACDBFF"
+        android:textSize="1sp"
+        app:layout_constraintEnd_toEndOf="@+id/graphV2"
+        app:layout_constraintTop_toTopOf="@+id/graphV2" />
+
     <View
         android:id="@+id/dataBackground"
         android:layout_width="0dp"
