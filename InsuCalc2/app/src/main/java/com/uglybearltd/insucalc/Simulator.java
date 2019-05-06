@@ -1,5 +1,9 @@
 package com.uglybearltd.insucalc;
 
+/*
+  * © 2018-2019 Harald Purnell Some Rights Reserved.
+*/
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -42,21 +46,21 @@ public class Simulator extends AppCompatActivity {
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        // Initialisation of the five user inputs
+        // Assignment of the five user inputs
         bs1h = findViewById(R.id.bs1hVal);
         bs2h = findViewById(R.id.bs2hVal);
         bs3h = findViewById(R.id.bs3hVal);
         bs4h = findViewById(R.id.bs4hVal);
         cbsVal = findViewById(R.id.cbsConsVal);
 
-        // Initialisation of the Textviews used for testing
+        // Assignment of Textviews for the purpose of testing
         test1 = findViewById(R.id.test1);
         test2 = findViewById(R.id.test2);
         test3 = findViewById(R.id.test3);
         test4 = findViewById(R.id.test4);
         test5 = findViewById(R.id.test5);
         
-        // Initialisation of the buttons and their event handlers
+        // Assignment of the buttons and their event handlers
         addData = findViewById(R.id.addData);
         Button createGraph = findViewById(R.id.createGraph);
         Button disclSim = findViewById(R.id.disclSim);
@@ -66,10 +70,10 @@ public class Simulator extends AppCompatActivity {
         disclSim.setOnClickListener(mListener);
         instrSim.setOnClickListener(mListener);
         
-        // Initialisation of the graph
+        // Assignment of the graph
         graphV2 = findViewById(R.id.graphV2);
         
-        // Initialises the arrays used to store blood glucose values
+        // Assignment of the arrays used to store blood glucose values
         listBs1H = new ArrayList<Double>();
         adapter1H = new ArrayAdapter<Double>(this, android.R.layout.simple_list_item_1, listBs1H);
 
@@ -89,7 +93,8 @@ public class Simulator extends AppCompatActivity {
                         R.id.bs3hVal,
                         R.id.bs4hVal
                 };
-
+        
+        // Hide Keyboard when interface is clicked outside of editText
         bs1h.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
