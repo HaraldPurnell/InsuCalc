@@ -42,20 +42,21 @@ public class Simulator extends AppCompatActivity {
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        // Five user inputs
+        // Initialisation of the five user inputs
         bs1h = findViewById(R.id.bs1hVal);
         bs2h = findViewById(R.id.bs2hVal);
         bs3h = findViewById(R.id.bs3hVal);
         bs4h = findViewById(R.id.bs4hVal);
         cbsVal = findViewById(R.id.cbsConsVal);
 
-        // Textviews used for testing
+        // Initialisation of the Textviews used for testing
         test1 = findViewById(R.id.test1);
         test2 = findViewById(R.id.test2);
         test3 = findViewById(R.id.test3);
         test4 = findViewById(R.id.test4);
         test5 = findViewById(R.id.test5);
-
+        
+        // Initialisation of the buttons and their event handlers
         addData = findViewById(R.id.addData);
         Button createGraph = findViewById(R.id.createGraph);
         Button disclSim = findViewById(R.id.disclSim);
@@ -64,9 +65,11 @@ public class Simulator extends AppCompatActivity {
         createGraph.setOnClickListener(mListener);
         disclSim.setOnClickListener(mListener);
         instrSim.setOnClickListener(mListener);
-
+        
+        // Initialisation of the graph
         graphV2 = findViewById(R.id.graphV2);
-
+        
+        // Initialises the arrays used to store blood glucose values
         listBs1H = new ArrayList<Double>();
         adapter1H = new ArrayAdapter<Double>(this, android.R.layout.simple_list_item_1, listBs1H);
 
@@ -86,7 +89,6 @@ public class Simulator extends AppCompatActivity {
                         R.id.bs3hVal,
                         R.id.bs4hVal
                 };
-
 
         bs1h.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -135,6 +137,7 @@ public class Simulator extends AppCompatActivity {
 
                 try {
                     if (checkRangeSum(etIds) == 0) {
+                        
                         //Gather values from each edit text and assign to respective array
                         str1H = bs1h.getText().toString();
                         do1H = Double.valueOf(str1H);
@@ -151,7 +154,8 @@ public class Simulator extends AppCompatActivity {
                         str4H = bs4h.getText().toString();
                         do4H = Double.valueOf(str4H);
                         listBs4H.add(do4H);
-
+                        
+                        // Empty the user inputs fields
                         bs1h.setText(null);
                         bs2h.setText(null);
                         bs3h.setText(null);
@@ -169,7 +173,8 @@ public class Simulator extends AppCompatActivity {
     private View.OnClickListener mListener = new View.OnClickListener() {
         public void onClick(View v) {
             switch (v.getId()) {
-
+                
+                // Opens additional windows without closing the current one and display relevant text
                 case R.id.disclSim:
                     final Dialog dialog = new Dialog(context);
                     dialog.setContentView(R.layout.disclaimer_simulator);
@@ -185,7 +190,6 @@ public class Simulator extends AppCompatActivity {
                     break;
 
                 case R.id.createGraph:
-
                     try {
                         double sumArray1h = 0, sumArray2h = 0, sumArray3h = 0, sumArray4h = 0;
                         graphV2.removeAllSeries();
@@ -200,7 +204,8 @@ public class Simulator extends AppCompatActivity {
 
                                     strCBS = cbsVal.getText().toString();
                                     doCBS = Double.valueOf(strCBS);
-
+                                    
+                                    // Calculate the sum of each array and the factor for each point
                                     for (i = 0; i < listBs1H.size(); i++) {
                                         sumArray1h += listBs1H.get(i);
                                     }
@@ -233,13 +238,13 @@ public class Simulator extends AppCompatActivity {
                                     point4 = (factor4 * doCBS);
                                     roPoint4 = round(point4, 2);
 
-                                    // Values for testing
                                     test1.setText(Double.toString(doCBS));
                                     test2.setText(Double.toString(roPoint1));
                                     test3.setText(Double.toString(roPoint2));
                                     test4.setText(Double.toString(roPoint3));
                                     test5.setText(Double.toString(roPoint4));
-
+                                    
+                                    // Create graph using the points calculated above
                                     LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[]{
                                             new DataPoint(0, doCBS),
                                             new DataPoint(1, roPoint1),
@@ -258,11 +263,13 @@ public class Simulator extends AppCompatActivity {
             }
         }
     };
-
+    
+    // Check if editText is empty
     public boolean isEmpty(EditText editText) {
         return editText.getText().toString().trim().length() == 0;
     }
-
+    
+    // Check if list of editTexts is empty
     public void checkEmpty(int[] ids) {
         for(int id: ids)
         {
@@ -276,7 +283,8 @@ public class Simulator extends AppCompatActivity {
 
     public int checkRangeSum(int[] ids) {
         int sum = 0;
-
+        
+        // Check if list of editTexts is above or below accepted range using a checksum
         for(int id: ids)
         {
             EditText editText = findViewById(id);
@@ -292,7 +300,8 @@ public class Simulator extends AppCompatActivity {
     }
 
     public boolean checkRangeSingle(EditText editText) {
-
+        
+        // Check if an editText is above or below accepted range using a checksum
         String stringET = editText.getText().toString();
         Double doubleET = Double.valueOf(stringET);
 
@@ -302,17 +311,19 @@ public class Simulator extends AppCompatActivity {
         }
         return true;
     }
-
+    
+    // Hides the soft keyboard
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
-
+    
+    // Opens another activity and closes this one
     public void launchInsuCalc(View view) {
         Intent intent = new Intent(this, InsuCalc.class);
         startActivity(intent);
     }
-
+    
     private static double round (double value, int precision) {
         int scale = (int) Math.pow(10, precision);
         return (double) Math.round(value * scale) / scale;
