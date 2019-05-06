@@ -39,7 +39,7 @@ public class InsuCalc extends AppCompatActivity {
 
         this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
-        // EditText assignments
+        // Assignment of EditTexts
         etDIA = findViewById(R.id.DIA);
         etCBS = findViewById(R.id.CBS);
         etTBS = findViewById(R.id.TBS);
@@ -49,12 +49,15 @@ public class InsuCalc extends AppCompatActivity {
 
         output.setInputType(InputType.TYPE_NULL);
         output.setText("00.0");
-
+        
+        // Assignment of textviews used for testing purposes
         insuDose3 =  findViewById(R.id.insuDose3);
         insuDose4 =  findViewById(R.id.insuDose4);
         insuDose5 =  findViewById(R.id.insuDose5);
         insuDose6 =  findViewById(R.id.insuDose6);
         insuDose7 =  findViewById(R.id.insuDose7);
+     
+        // Assignment of graph
         graph = findViewById(R.id.graph);
 
         etIds = new int[]
@@ -68,7 +71,7 @@ public class InsuCalc extends AppCompatActivity {
 
         graph.setTitle("Blood Sugar Simulated Change");
 
-        // Button assignments and listeners
+        // Assignment of buttons and their event handlers 
         Button buttonCalc = findViewById(R.id.CalcInsDos);
         Button buttonDiscl = findViewById(R.id.disclSim);
         Button buttonInstruct = findViewById(R.id.instrSim);
@@ -153,8 +156,8 @@ public class InsuCalc extends AppCompatActivity {
                         }
                         break;
 
+                    // Opens additional windows without closing the current one and display relevant text
                     case R.id.disclSim:
-
                         final Dialog dialog = new Dialog(context);
                         dialog.setContentView(R.layout.disclaimer);
                         dialog.setTitle("Disclaimer");
@@ -162,7 +165,6 @@ public class InsuCalc extends AppCompatActivity {
                         break;
 
                     case R.id.instrSim:
-
                         final Dialog dialog1 = new Dialog(context);
                         dialog1.setContentView(R.layout.instructions);
                         dialog1.setTitle("Instructions");
@@ -173,7 +175,8 @@ public class InsuCalc extends AppCompatActivity {
                         try {
 
                             graph.removeAllSeries();
-
+                            
+                            // Convert values gathered from edit text to usable data types
                             sDIA = etDIA.getText().toString();
                             sCBS = etCBS.getText().toString();
                             sTBS = etTBS.getText().toString();
@@ -190,11 +193,10 @@ public class InsuCalc extends AppCompatActivity {
 
                             if (insuDosecheck.equals("00.0")) {
                                 output.setError("Something went wrong (See instructions for help)!");
-
                             }
                             else {
                                 if (dCBS > dTBS){
-
+                                    // Calculate each point on the graph
                                     point1 = dCBS/0.775;
                                     point2 = dCBS/0.945;
                                     point3 = dCBS/1.069;
@@ -210,7 +212,8 @@ public class InsuCalc extends AppCompatActivity {
                                     insuDose5.setText(Double.toString(roPoint2));
                                     insuDose6.setText(Double.toString(roPoint3));
                                     insuDose7.setText(Double.toString(roPoint4));
-
+                                    
+                                    // Create graph using the points calculated above
                                     LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
                                             new DataPoint(0, dCBS),
                                             new DataPoint(1, roPoint1),
@@ -221,7 +224,7 @@ public class InsuCalc extends AppCompatActivity {
                                     graph.addSeries(series);
                                 }
                                 else if (dCBS < dTBS) {
-
+                                    // Calculate each point on the graph
                                     point1 = dCBS/0.49;
                                     point2 = dCBS/0.56;
                                     point3 = dCBS/0.606;
@@ -237,7 +240,8 @@ public class InsuCalc extends AppCompatActivity {
                                     insuDose5.setText(Double.toString(roPoint2));
                                     insuDose6.setText(Double.toString(roPoint3));
                                     insuDose7.setText(Double.toString(roPoint4));
-
+                                    
+                                    // Create graph using the points calculated above
                                     LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
                                             new DataPoint(0, dCBS),
                                             new DataPoint(1, roPoint1),
@@ -247,7 +251,7 @@ public class InsuCalc extends AppCompatActivity {
                                     });
                                     graph.addSeries(series);
                                 } else {
-
+                                    // Calculate each point on the graph
                                     point1 = dCBS/0.7252;
                                     point2 = dCBS/0.8238;
                                     point3 = dCBS/0.9612;
@@ -263,7 +267,8 @@ public class InsuCalc extends AppCompatActivity {
                                     insuDose5.setText(Double.toString(roPoint2));
                                     insuDose6.setText(Double.toString(roPoint3));
                                     insuDose7.setText(Double.toString(roPoint4));
-
+                                    
+                                    // Create graph using the points calculated above
                                     LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
                                             new DataPoint(0, dCBS),
                                             new DataPoint(1, roPoint1),
