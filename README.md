@@ -1,6 +1,6 @@
 # InsuCalc 
 
-This application is an academic project created for a third year project course module. 
+InsuCalc is an academic project created for a third year project course module. 
 
 ## Overview
 
